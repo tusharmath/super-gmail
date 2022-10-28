@@ -1,7 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .sg-container {
   box-sizing: border-box;
   margin-top: 12px;
   font-size: 14px;
+  min-width: 800px;
 
   --button-active-bg-color: #d3e2fd;
   --button-hover-bg-color: #eeeeee;
@@ -46,11 +51,13 @@
   position: fixed;
   top: 20%;
   left: 50%;
-  width: 756px;
+  min-width: 600px;
   background-color: rgb(255, 255, 255);
   z-index: 1000;
   border-radius: 4px;
   box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 24px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
+  max-height: 80%;
+  background-color: #fff;
+  border-radius: 16px;
 }

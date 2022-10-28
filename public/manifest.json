@@ -3,6 +3,10 @@
   "name": "Super Gmail",
   "description": "Make gmail like superhuman",
   "version": "1.0",
+  "action": {
+    "default_popup": "app.html",
+    "default_icon": "img/icons8-rocket-100.png"
+  },
   "content_scripts": [
     {
       "matches": ["https://mail.google.com/*"],
