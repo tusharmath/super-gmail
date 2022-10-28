@@ -11,13 +11,13 @@ const DeleteButton = (_: {onClick?: (e: EventTarget) => unknown}) => {
     </button>
   )
 }
-const SaveButton = (_: {onClick?: (e: EventTarget) => unknown}) => {
+const AddButton = (_: {onClick?: (e: EventTarget) => unknown}) => {
   return (
     <button
       className={`px-4 py-2 bg-blue-200 hover:bg-blue-300 border-solid border border-blue-400 w-20 rounded-md uppercase drop-shadow-md`}
       onClick={(e) => _?.onClick(e.target)}
     >
-      {"Save"}
+      {"Add"}
     </button>
   )
 }
@@ -38,6 +38,7 @@ export class CreateSplit extends Component<
 > {
   componentWillMount(): void {
     this.setState({filters: [], from: "", name: ""})
+
     chrome.storage.sync.get(["filters"], ({filters}) => {
       if (filters instanceof Array) {
         this.setState({filters: filters, from: "", name: ""})
@@ -54,17 +55,19 @@ export class CreateSplit extends Component<
     this.setState({name: (e as HTMLInputElement).value})
   }
 
+  sync(filters: Filters) {
+    chrome.storage.sync.set({filters}, () => this.setState({filters}))
+  }
+
   insert(): void {
     const filters = [...this.state.filters, {name: this.state.name, from: this.state.from}]
-
-    chrome.storage.sync.set({filters}, () => {
-      this.setState({filters, from: "", name: ""})
-    })
+    this.sync(filters)
+    this.setState({name: "", from: ""})
   }
 
   remove(i: number): void {
     const filters = this.state.filters.filter((e) => e !== this.state.filters[i])
-    this.setState({filters})
+    this.sync(filters)
   }
 
   render() {
@@ -75,8 +78,9 @@ export class CreateSplit extends Component<
           <div className="space-y-2">
             {this.state.filters.map(({name, from}, i) => (
               <div className="flex flex-row space-x-2">
-                <Input value={from} />
-                <Input value={name} />
+                <div className="border-dotted border border-indigo-400 px-4 py-2 flex-1 w-80 rounded-md">
+                <strong>{name}</strong>: {from}
+                </div>
 
                 <DeleteButton onClick={() => this.remove(i)} />
               </div>
@@ -85,7 +89,7 @@ export class CreateSplit extends Component<
             <div className="flex flex-row space-x-2">
               <Input placeholder={"Pattern"} value={this.state.from} onChange={(e) => this.setFrom(e)} />
               <Input placeholder={"Label"} value={this.state.name} onChange={(e) => this.setName(e)} />
-              <SaveButton onClick={() => this.insert()} />
+              <AddButton onClick={() => this.insert()} />
             </div>
           </div>
         </div>

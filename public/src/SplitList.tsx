@@ -2,10 +2,15 @@ import {Component} from "preact"
 
 export class SplitList extends Component<{}, {filters: {name: string; from: string}[]}> {
   componentWillMount(): void {
+    this.setState({filters: []})
     chrome.storage.sync.get(["filters"], ({filters}) => {
       if (filters instanceof Array) {
         this.setState({filters: filters})
       }
+    })
+
+    chrome.storage.onChanged.addListener(({filters: {newValue, oldValue}}) => {
+      this.setState({filters: newValue})
     })
   }
   render() {
