@@ -1,9 +1,6 @@
 import {Component} from "preact"
 import {Filters} from "./QuickFilters"
 
-const Button = (name: string, theme: string) => (
-  <button className={`px-4 py-2 bg-${theme}-200 w-20 rounded-md uppercase`}>{name}</button>
-)
 const DeleteButton = (_: {onClick?: (e: EventTarget) => unknown}) => {
   return (
     <button
@@ -36,11 +33,16 @@ const Input = (_: {value?: string; placeholder?: string; onChange?: (e: EventTar
 )
 
 export class CreateSplit extends Component<
-  {onSubmit?: (ev: {name: string; from: string} | undefined) => unknown; filters: {name: string; from: string}[]},
+  {onSubmit?: (ev: {name: string; from: string} | undefined) => unknown},
   {filters: Filters; name: string; from: string}
 > {
   componentWillMount(): void {
-    this.setState({filters: this.props.filters, name: "", from: ""})
+    this.setState({filters: [], from: "", name: ""})
+    chrome.storage.sync.get(["filters"], ({filters}) => {
+      if (filters instanceof Array) {
+        this.setState({filters: filters, from: "", name: ""})
+      }
+    })
   }
 
   setFrom(e: EventTarget): void {
@@ -54,7 +56,10 @@ export class CreateSplit extends Component<
 
   insert(): void {
     const filters = [...this.state.filters, {name: this.state.name, from: this.state.from}]
-    this.setState({filters, from: "", name: ""})
+
+    chrome.storage.sync.set({filters}, () => {
+      this.setState({filters, from: "", name: ""})
+    })
   }
 
   remove(i: number): void {

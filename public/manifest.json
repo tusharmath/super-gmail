@@ -12,5 +12,6 @@
       "matches": ["https://mail.google.com/*"],
       "js": ["src/ContentScript.js"]
     }
-  ]
+  ],
+  "permissions": ["storage"]
 }

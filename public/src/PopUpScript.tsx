@@ -1,6 +1,5 @@
 import {render, Component} from "preact"
 
-import "../css/sg-popup.css"
 import {CreateSplit} from "./CreateSplit"
 import {Filters, QuickFilters} from "./QuickFilters"
 
@@ -15,7 +14,7 @@ class App extends Component<{}, {filters: Filters}> {
     }
   }
   render() {
-    return <CreateSplit filters={this.state.filters} onSubmit={(filter) => this.addFilter(filter)} />
+    return <CreateSplit onSubmit={(filter) => this.addFilter(filter)} />
   }
 }
 
