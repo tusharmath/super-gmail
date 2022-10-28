@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "matches": ["https://mail.google.com/*"],
-      "js": ["src/sg-content.js"]
+      "js": ["src/ContentScript.js"]
     }
   ]
 }

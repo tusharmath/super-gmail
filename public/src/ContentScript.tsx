@@ -1,11 +1,9 @@
-import {Component} from "preact"
-import {CreateSplit} from "./CreateSplit"
-import {SplitList} from "./SplitList"
+import {render} from "preact"
 
-const QuickFilters: {name: string; from: string}[] = [
-  {name: "Github", from: "github"},
-  {name: "LinkedIn", from: "linkedin"},
-]
+import {Component} from "preact"
+import "../css/sg-content.css"
+import {QuickFilters} from "./QuickFilters"
+import {SplitList} from "./SplitList"
 
 export class App extends Component<
   {},
@@ -31,15 +29,13 @@ export class App extends Component<
 
   render() {
     const filters = this.state.filters
+    console.log({state: this.state})
     return (
       <div className="sg-container">
-        <SplitList filters={filters} onInsert={() => this.toggleFilterForm()} />
-        {this.state.showFilterForm ? (
-          <CreateSplit filters={this.state.filters} onSubmit={(filter) => this.addFilter(filter)} />
-        ) : (
-          <></>
-        )}
+        <SplitList filters={filters} />
       </div>
     )
   }
 }
+
+render(<App />, document.body)
