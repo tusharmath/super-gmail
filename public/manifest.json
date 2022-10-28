@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Super Gmail",
+  "description": "Make gmail like superhuman",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["src/sg-content.js"]
+    }
+  ]
+}
