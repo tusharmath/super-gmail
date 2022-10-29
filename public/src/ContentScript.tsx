@@ -1,8 +1,7 @@
 import {render} from "preact"
 
 import {Component} from "preact"
-import "../css/sg-content.css"
-import {QuickFilters} from "./QuickFilters"
+import "../css/Content.css"
 import {SplitList} from "./SplitList"
 
 export class App extends Component {
