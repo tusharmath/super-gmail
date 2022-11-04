@@ -2,7 +2,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["chrome-types"]
   },
   "compileOnSave": true
 }

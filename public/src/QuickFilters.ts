@@ -1,6 +1,6 @@
-export type Filters = {name: string; from: string}[]
+export type Filter = {name: string; search: string}
 
-export const QuickFilters: Filters = [
-  {name: "Github", from: "github"},
-  {name: "LinkedIn", from: "linkedin"},
+export const QuickFilters: Array<Filter> = [
+  {name: "Github", search: "in:inbox from:github"},
+  {name: "LinkedIn", search: "in:inbox from:linkedin"},
 ]

@@ -1,6 +1,7 @@
 import {Component} from "preact"
+import {Filter} from "./QuickFilters"
 
-export class SplitList extends Component<{}, {filters: {name: string; from: string}[]}> {
+export class SplitList extends Component<{}, {filters: Filter[]}> {
   componentWillMount(): void {
     this.setState({filters: []})
     chrome.storage.sync.get(["filters"], ({filters}) => {
@@ -20,9 +21,9 @@ export class SplitList extends Component<{}, {filters: {name: string; from: stri
         <div className="sg-filter-item" key={name}>
           <a href={`#inbox`}>#Inbox</a>
         </div>
-        {filters.map(({name, from: from}) => (
+        {filters.map(({name, search}) => (
           <div className="sg-filter-item" key={name}>
-            <a href={`#search/in%3Ainbox+from%3A${from}`}>#{name}</a>
+            <a href={`#search/${search}`}>#{name}</a>
           </div>
         ))}
       </div>
