@@ -24,16 +24,23 @@
   display: flex;
   background: none;
   border: none;
-  font-weight: 600;
   color: var(--button-color);
   text-decoration: none;
   align-items: center;
   justify-content: center;
+  margin: 0px 2px;
 }
 
 .sg-filter-item a:hover,
 .sg-filter-item button:hover {
   background-color: var(--button-hover-bg-color);
+}
+
+.sg-filter-item-selected a,
+.sg-filter-item-selected a:hover {
+  text-decoration: underline;
+  background-color: #d3e3fd;
+  font-weight: 600;
 }
 
 .sg-filter-row {

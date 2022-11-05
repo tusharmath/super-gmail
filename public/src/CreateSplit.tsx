@@ -47,12 +47,12 @@ export class CreateSplit extends Component<
   }
 
   setSearch(e: EventTarget): void {
-    const value = (e as HTMLInputElement).value
+    const value = (e as HTMLInputElement).value.trim()
     this.setState({search: value})
   }
 
   setName(e: EventTarget): void {
-    this.setState({name: (e as HTMLInputElement).value})
+    this.setState({name: (e as HTMLInputElement).value.trim()})
   }
 
   sync(filters: Filter[]) {
